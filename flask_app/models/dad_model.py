@@ -69,4 +69,3 @@ class Dad:
         query = 'INSERT into dads (username, email, password) VALUES (%(username)s, %(email)s, %(password)s);'
         dad_id = connectToMySQL(DATABASE).query_db(query, data)
         return dad_id
-s
