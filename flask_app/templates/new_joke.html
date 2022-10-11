@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+    <title>Dad Jokes</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Dad Jokes</h1>
+            </div>
+            <div class="col">
+                <a href="/jokes">Back to All Jokes</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Add a Dad Joke</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        {% with messages = get_flashed_messages(with_categories = true) %}
+                        <form action="/jokes" method="post">
+                            <!-- remember to add hidden feature/ first thing always  -->
+                                <!-- relationship stuff -->
+                            <input type="hidden" name="dad_id" value="{{ session.dad_id }}">
+                            <div class="mb-3">
+                                <label for="setup" class="form-label">Setup:</label>
+                                <textarea name="setup" id="setup" class="form-control"></textarea>
+                                {% if messages %}
+                                    {% for category, message in messages %}
+                                        {% if category == 'setup' %}
+                                        <span class="form-text text-danger">{{ message }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="mb-3">
+                                <label for="punchline" class="form-label">Punchline:</label>
+                                <textarea name="punchline" id="punchline" class="form-control"></textarea>
+                                {% if messages %}
+                                    {% for category, message in messages %}
+                                        {% if category == 'punchline' %}
+                                        <span class="form-text text-danger">{{ message }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <input type="submit" value="ADD JOKE" class="btn btn-primary">
+                            </div>
+                        </form>
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
